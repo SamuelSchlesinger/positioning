@@ -16,3 +16,10 @@ itertools = "0.10"
 bevy = ["dep:bevy"]
 serde = ["dep:serde"]
 rand = ["dep:rand"]
+
+[dev-dependencies]
+criterion = "0.4"
+
+[[bench]]
+name = "heuristic_comparison"
+harness = false
