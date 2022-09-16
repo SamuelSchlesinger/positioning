@@ -4,5 +4,9 @@
 //! coordinates. The particularly useful thing to abstract out is pathfinding, as that's quite
 //! intricate to implement from scratch every time I need it.
 
+/// The pathfinding module consists of an implementation of A* and a domain specific heuristic which
+/// is very useful in the context of a 3D grid.
 pub mod pathfinding;
-pub mod position;
+mod position;
+
+pub use position::Position;
