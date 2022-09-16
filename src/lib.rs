@@ -4,8 +4,8 @@
 //! coordinates. The particularly useful thing to abstract out is pathfinding, as that's quite
 //! intricate to implement from scratch every time I need it.
 
-/// The pathfinding module consists of an implementation of A* and a domain specific heuristic which
-/// is very useful in the context of a 3D grid.
+/// Contains an implementation of A* and all-pairs-shortest paths with fun a twist where the latter
+/// performs well as a heuristic in a specific context.
 pub mod pathfinding;
 mod position;
 

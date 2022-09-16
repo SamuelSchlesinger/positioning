@@ -8,10 +8,6 @@
 //! Then, we can compute all-pairs shortest paths on the statically known paths and use that
 //! information in order to inform a clever heuristic for the A* algorithm. That is the strategy
 //! taken in this module.
-//!
-//! A major potential improvement would be to implement a Jump Point Search on top of that, but
-//! that is going to be a lot harder for me to verify the correctness of and this is what I'm going
-//! for this time.
 
 /// A number which has an Infinity variant in order to indicate that there is no path. It is
 /// convenient to be consistent with the pathfinding literature by using this type, otherwise I
