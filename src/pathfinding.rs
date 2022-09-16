@@ -178,9 +178,7 @@ pub struct HammingDistance;
 
 impl Heuristic for HammingDistance {
     fn heuristic_distance(&self, start: Position, end: Position) -> WithInfinity<u64> {
-        WithInfinity::Normal(
-            start.x.abs_diff(end.x) + start.y.abs_diff(end.y) + start.z.abs_diff(end.z),
-        )
+        WithInfinity::Normal(start.hamming_distance(end))
     }
 }
 

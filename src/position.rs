@@ -31,7 +31,7 @@ impl Position {
     /// assert!(!Position::new(0, 0, 0).is_adjacent_to(Position::new(1, 1, 0)))
     /// ```
     pub fn is_adjacent_to(self, other: Position) -> bool {
-        self.x.abs_diff(other.x) + self.y.abs_diff(other.y) + self.z.abs_diff(other.z) == 1
+        self.hamming_distance(other) == 1
     }
 
     /// Returns an iterator over all adjacent positions.
@@ -48,6 +48,11 @@ impl Position {
                 })
                 .filter(move |pos| self.is_adjacent_to(*pos)),
         )
+    }
+
+    /// Computes the Hamming distance between two points.
+    pub fn hamming_distance(self, other: Position) -> u64 {
+        self.x.abs_diff(other.x) + self.y.abs_diff(other.y) + self.z.abs_diff(other.z)
     }
 }
 
