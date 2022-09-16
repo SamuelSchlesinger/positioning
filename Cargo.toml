@@ -1,0 +1,18 @@
+[package]
+name = "positioning"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy = { version = "0.8", optional = true }
+serde = { version = "1.0", optional = true }
+rand = { version = "0.8", optional = true }
+itertools = "0.10.4"
+priority-queue = "1.2.3"
+
+[features]
+bevy = ["dep:bevy"]
+serde = ["dep:serde"]
+rand = ["dep:rand"]
