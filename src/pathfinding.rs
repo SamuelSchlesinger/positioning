@@ -60,8 +60,8 @@ fn with_infinity_test() {
     }
 }
 
-/// An admissible heuristic for A* is one which always returns an optimistic result. These can be
-/// used in the A* algorithm to improve performance when searching.
+/// An admissible heuristic for the A* pathfinding algorithm is one which always returns an
+/// optimistic result. Oftentimes, a good heuristic can make a big performance difference.
 pub trait Heuristic {
     fn heuristic_distance(&self, start: Position, end: Position) -> WithInfinity<u64>;
 
@@ -143,6 +143,25 @@ pub trait Heuristic {
 
 /// The all-pairs shortest paths on the static graph described above will always be an admissible
 /// heuristic for the dynamic graph as long as the statically closed tiles are never unblocked.
+///
+/// This heuristic is extremely valuable for the use case described in this module. Imagine the
+/// following scenario:
+///
+/// ```text
+/// ____________
+/// |e X   start|
+/// |n X        |
+/// |d X        |
+/// |  XXXXXXX  |
+/// |           |
+/// -------------
+/// ```
+///
+/// The [`HammingDistance`] heuristic will send you looking all throughout the top right region
+/// before you realize you're meant to go around, whereas the all pairs metric will immediately be
+/// able to bypass this obstacle. In the presence of dynamically but not statically blocked tiles,
+/// we can run into these problems again easily, but we avoid them in many cases even then. The
+/// more tight the heuristic is to the real distance, the better.
 pub struct AllPairsShortestPaths(BTreeMap<(Position, Position), WithInfinity<u64>>);
 
 impl Heuristic for AllPairsShortestPaths {
@@ -172,6 +191,7 @@ impl AllPairsShortestPaths {
     }
 }
 
+/// Computes a data structure caching the distances between all open positions
 pub fn all_pairs_shortest_paths(open_positions: &BTreeSet<Position>) -> AllPairsShortestPaths {
     let mut distances = BTreeMap::new();
     for position in open_positions.iter().copied() {
