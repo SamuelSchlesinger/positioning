@@ -1,6 +1,6 @@
 # Positioning
 
-* [rustdocs](https://samuelschlesinger.github.io/positioning/positioning/)
+[**rustdocs**](https://samuelschlesinger.github.io/positioning/positioning/)
 
 A library for manipulating coordinates on a 3D grid. This will contain code
 that I'll often end up repeating in games. Currently, it is not on
