@@ -61,7 +61,8 @@ fn with_infinity_test() {
 }
 
 /// An admissible heuristic for the A* pathfinding algorithm is one which always returns an
-/// optimistic result. Oftentimes, a good heuristic can make a big performance difference.
+/// optimistic result. Oftentimes, a good heuristic can make a big performance difference. The more
+/// tight the heuristic is to the real distance, the better.
 pub trait Heuristic {
     fn heuristic_distance(&self, start: Position, end: Position) -> WithInfinity<u64>;
 
@@ -160,8 +161,10 @@ pub trait Heuristic {
 /// The [`HammingDistance`] heuristic will send you looking all throughout the top right region
 /// before you realize you're meant to go around, whereas the all pairs metric will immediately be
 /// able to bypass this obstacle. In the presence of dynamically but not statically blocked tiles,
-/// we can run into these problems again easily, but we avoid them in many cases even then. The
-/// more tight the heuristic is to the real distance, the better.
+/// we can run into these problems again easily, but we avoid them in many cases even then.
+///
+/// **Correctness**: When you use this heuristic, you should be careful to ensure that the dynamically
+/// open positions are a subset of the statically open positions.
 pub struct AllPairsShortestPaths(BTreeMap<(Position, Position), WithInfinity<u64>>);
 
 impl Heuristic for AllPairsShortestPaths {
