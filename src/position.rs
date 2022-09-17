@@ -17,6 +17,16 @@ pub struct Position {
     pub z: i64,
 }
 
+impl From<(i64, i64, i64)> for Position {
+    fn from(triple: (i64, i64, i64)) -> Self {
+        Position {
+            x: triple.0,
+            y: triple.1,
+            z: triple.2,
+        }
+    }
+}
+
 impl Position {
     /// Creates a new [`Position`].
     pub fn new(x: i64, y: i64, z: i64) -> Self {
@@ -26,7 +36,7 @@ impl Position {
     /// Returns whether or not we are adjacent to another position. Diagonal adjacency is not
     /// counted:
     /// ```
-    /// use positioning::position::Position;
+    /// use positioning::Position;
     ///
     /// assert!(!Position::new(0, 0, 0).is_adjacent_to(Position::new(1, 1, 0)))
     /// ```

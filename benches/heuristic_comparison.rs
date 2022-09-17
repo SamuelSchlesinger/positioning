@@ -8,7 +8,7 @@ use positioning::{
 
 fn benchmark(c: &mut Criterion) {
     let mut statically_open = BTreeSet::new();
-    for n in vec![100, 200, 500, 1000].into_iter() {
+    for n in vec![60].into_iter() {
         for x in 0..n {
             for y in 0..n {
                 if (y == 2 && x > 2 && x < n - 2) || (x == 2 && y > 2) {
