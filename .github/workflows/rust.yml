@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install ALSA Dev
+      run: |
+        sudo apt-get update
+        sudo apt-get install libasound2-dev
     - uses: actions/checkout@v3
     - name: Build
       run: cargo build --verbose --all-features
