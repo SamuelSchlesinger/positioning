@@ -17,11 +17,16 @@ convenient functionality around it:
 let p: Position = (1, 2, 3i64).into();
 
 for neighbor in p.adjacent() {
-  p.is_adjacent_to(neighbor);
+  assert!(p.is_adjacent_to(neighbor));
+  assert!(p.hamming_distance(neighbor) == 1);
 }
 ```
 
-There are two other features of this library:
+The above example showcases the key assumption of this library, and how you'll
+know if its useful for your settings: it defines adjacency of two positions as
+being equivalent to having Hamming distance 1 between them. Pathfinding, thus,
+will find paths which take movements of Hamming distance 1 away, excluding
+diagonal paths.
 
 ## Breadth First Search
 
