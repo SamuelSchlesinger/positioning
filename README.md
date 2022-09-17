@@ -9,14 +9,36 @@ me, but I am open to changing that if others use it. I've hosted the rustdocs
 above so its no less convenient than if it were on
 [crates.io](https://crates.io).
 
-## Why?
+The main feature of the library is the `Position` type which I was reusing
+across multiple projects. It's no more than a triple of `i64`s with some
+convenient functionality around it:
 
-You might use this library if you're writing a game similar to the ones I've
-been enjoying writing recently, where the characters exist on a 3D grid and can
-move anywhere of Hamming distance 1 away in one move. It provides substantial
-performance improvements compared to a naive implementation of pathfinding.
+```rust
+let p: Position = (1, 2, 3i64).into();
 
-## How?
+for neighbor in p.adjacent() {
+  p.is_adjacent_to(neighbor);
+}
+```
+
+There are two other features of this library:
+
+## Breadth First Search
+
+We implement an iterator `Bfs<'a>` which, based on a set of passable positions,
+return each position in distance order, disambiguating based on the order
+defined on `Position`. The iterator also returns the distance at which the
+reachable position was found.
+
+This is helpful if you're trying to write code which searches for something,
+such as a viable task to do within a certain distance, or an enemy which you can
+begin to target. On the other hand, its very much encouraged that you pick a
+target and use the `pathfinding` module after that, as hacking the internals
+of this to provide paths would lose a lot of the benefits of this library, which
+are described in the following section.
+
+
+## Pathfinding
 
 The reason I worked on this code was because I was running into major
 performance issues with pathfinding. First I implemented Djikstra better, then
