@@ -133,6 +133,16 @@
 <span id="133">133</span>
 <span id="134">134</span>
 <span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
 </pre><pre class="rust"><code><span class="doccomment">//! # Position
 //!
 //! A data type representing coordinates in a 3D grid using [`i32`] coordinates, with wrapping
@@ -152,6 +162,16 @@
     <span class="kw">pub </span>z: i64,
 }
 
+<span class="kw">impl </span>From&lt;(i64, i64, i64)&gt; <span class="kw">for </span>Position {
+    <span class="kw">fn </span>from(triple: (i64, i64, i64)) -&gt; <span class="self">Self </span>{
+        Position {
+            x: triple.<span class="number">0</span>,
+            y: triple.<span class="number">1</span>,
+            z: triple.<span class="number">2</span>,
+        }
+    }
+}
+
 <span class="kw">impl </span>Position {
     <span class="doccomment">/// Creates a new [`Position`].
     </span><span class="kw">pub fn </span>new(x: i64, y: i64, z: i64) -&gt; <span class="self">Self </span>{
@@ -161,7 +181,7 @@
     <span class="doccomment">/// Returns whether or not we are adjacent to another position. Diagonal adjacency is not
     /// counted:
     /// ```
-    /// use positioning::position::Position;
+    /// use positioning::Position;
     ///
     /// assert!(!Position::new(0, 0, 0).is_adjacent_to(Position::new(1, 1, 0)))
     /// ```

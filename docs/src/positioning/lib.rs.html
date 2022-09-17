@@ -10,7 +10,15 @@
 <span id="10">10</span>
 <span id="11">11</span>
 <span id="12">12</span>
-</pre><pre class="rust"><code><span class="doccomment">//! # Positioning
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+</pre><pre class="rust"><code><span class="attribute">#![feature(map_first_last)]
+
+</span><span class="doccomment">//! # Positioning
 //!
 //! This is a library to encapsulate some code I&#39;ve found myself repeating recently around game
 //! coordinates. The particularly useful thing to abstract out is pathfinding, as that&#39;s quite
@@ -20,6 +28,10 @@
 /// performs well as a heuristic in a specific context.
 </span><span class="kw">pub mod </span>pathfinding;
 <span class="kw">mod </span>position;
+
+<span class="doccomment">/// Contains an implementation of an iterator which returns positions out from a given start in
+/// breadth first order.
+</span><span class="kw">pub mod </span>bfs;
 
 <span class="kw">pub use </span>position::Position;
 </code></pre></div>
