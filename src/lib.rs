@@ -1,5 +1,3 @@
-#![feature(map_first_last)]
-
 //! # Positioning
 //!
 //! This is a library to encapsulate some code I've found myself repeating recently around game
