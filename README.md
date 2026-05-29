@@ -111,6 +111,21 @@ Even if we introduce one directly in the way of the shortest path, we'll still
 be searching through much less of the grid. In some common in-game cases, this
 ends up taking the cost down (roughly) from quadratic to linear.
 
+## Building
+
+```sh
+cargo build
+cargo test
+```
+
+Optional features can be enabled individually:
+
+```sh
+cargo build --features bevy    # enables bevy::prelude::Component derive on Position
+cargo build --features serde   # enables Serialize/Deserialize on Position
+cargo build --features rand    # enables random Position generation via the rand crate
+```
+
 ## Contributions and Forks
 
 Contributions and forks are very welcome! Games have very different needs, and

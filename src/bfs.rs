@@ -51,14 +51,14 @@ impl<'a> Iterator for Bfs<'a> {
                 self.visited.insert(cursor);
                 for neighbor in cursor
                     .adjacent()
-                    .filter(|neighbor| self.open_positions.contains(&neighbor))
+                    .filter(|neighbor| self.open_positions.contains(neighbor))
                 {
                     if self.visited.contains(&neighbor) {
                         continue;
                     }
                     self.next_frontier.insert(neighbor);
                 }
-                return Some((cursor, self.distance));
+                Some((cursor, self.distance))
             }
         }
     }

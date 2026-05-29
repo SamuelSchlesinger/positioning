@@ -17,16 +17,11 @@ use std::collections::{BTreeMap, BTreeSet, VecDeque};
 use priority_queue::DoublePriorityQueue; // TODO Replace with PriorityQueue<_, Reverse<_>>
 
 use crate::position::Position;
-#[derive(Debug, PartialOrd, Ord, PartialEq, Eq, Copy, Clone)]
+#[derive(Debug, Default, PartialOrd, Ord, PartialEq, Eq, Copy, Clone)]
 pub enum WithInfinity<I> {
     Normal(I),
+    #[default]
     Infinity,
-}
-
-impl<I> Default for WithInfinity<I> {
-    fn default() -> Self {
-        WithInfinity::Infinity
-    }
 }
 
 impl<I: std::ops::Add<I, Output = I>> std::ops::Add<WithInfinity<I>> for WithInfinity<I> {
@@ -99,7 +94,7 @@ pub trait Heuristic {
                     {
                         let alt = distances_from_start
                             .get(&position)
-                            .map(|e| *e)
+                            .copied()
                             .unwrap_or_default()
                             + WithInfinity::Normal(1);
                         if alt < *distances_from_start.entry(neighbor).or_default() {
@@ -184,7 +179,7 @@ impl AllPairsShortestPaths {
         position: Position,
         other_position: Position,
     ) -> Option<WithInfinity<u64>> {
-        self.0.get(&(position, other_position)).map(|p| *p)
+        self.0.get(&(position, other_position)).copied()
     }
 }
 
@@ -328,7 +323,7 @@ fn shortest_path_test() {
 
     for position in dynamic_open_positions.iter().copied() {
         for other in dynamic_open_positions.iter().copied() {
-            if !(other.x == N / 2) || other.y == 0 {
+            if (other.x != N / 2) || other.y == 0 {
                 continue;
             }
             if position == Position::new(N / 2, 0, 0)

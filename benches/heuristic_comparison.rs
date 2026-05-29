@@ -30,7 +30,7 @@ fn benchmark(c: &mut Criterion) {
             |b, d| {
                 b.iter(|| {
                     let _ = all_pairs.find_shortest_path(
-                        &d,
+                        d,
                         Position::new(n - 1, n - 1, 0),
                         Position::new(0, n - 1, 0),
                     );
@@ -43,7 +43,7 @@ fn benchmark(c: &mut Criterion) {
             |b, d| {
                 b.iter(|| {
                     let _ = hamming_distance.find_shortest_path(
-                        &d,
+                        d,
                         Position::new(n - 1, n - 1, 0),
                         Position::new(0, n - 1, 0),
                     );
